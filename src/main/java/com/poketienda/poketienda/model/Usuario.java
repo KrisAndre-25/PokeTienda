@@ -1,30 +1,34 @@
 package com.poketienda.poketienda.model;
 
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private Integer id;
-    private String username;
+    @Column(nullable = false)
+    private String nombre;
+
+    @Column(unique = true, nullable = false)
     private String email;
-    private String password;
-    private LocalDateTime fecha_creacion;
-    private Boolean activo = true;
 
+    @Column(nullable = false)
+    private String password;
+
+    private boolean activo = true;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime fechaCreacion;
 }

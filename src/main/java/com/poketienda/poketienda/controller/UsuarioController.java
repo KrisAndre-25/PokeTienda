@@ -1,27 +1,35 @@
 package com.poketienda.poketienda.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.poketienda.poketienda.model.Usuario;
 import com.poketienda.poketienda.service.UsuarioService;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
+
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> listarUsuarios(){
+    public List<Usuario> listarUsuarios() {
         return usuarioService.getUsuarios();
     }
-    
 
+    @PostMapping
+    public Usuario crear(@RequestBody Usuario usuario) {
+        return usuarioService.crearUsuario(usuario);
+    }
 
+    @PutMapping("/{id}")
+    public Usuario actualizar(@PathVariable int id, @RequestBody Usuario usuario) {
+        return usuarioService.actualizarUsuario(id, usuario);
+    }
 
+    @DeleteMapping("/{id}")
+    public String eliminar(@PathVariable int id) {
+        return usuarioService.desactivarUsuario(id);
+    }
 }
