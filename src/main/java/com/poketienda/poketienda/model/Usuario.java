@@ -1,35 +1,30 @@
 package com.poketienda.poketienda.model;
 
 import java.time.LocalDateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-// Importación necesaria para el hotfix
-import com.fasterxml.jackson.annotation.JsonProperty; [cite: 5]
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "usuarios")
-public class Usuario { [cite: 5]
+public class Usuario {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; [cite: 5]
+    private Integer id;
 
-    private String username; [cite: 6]
-    private String email; [cite: 6]
+    private String username;
+    private String email;
 
-    // Hotfix: Se permite escribir la contraseña al crear/editar, 
-    // pero se oculta al listar o consultar usuarios por API.
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password; [cite: 6]
+    private String password;
 
-    private LocalDateTime fecha_creacion; [cite: 6]
-    private Boolean activo = true; [cite: 6]
+    private LocalDateTime fecha_creacion;
+    
+    private boolean activo = true; 
 }
