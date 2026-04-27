@@ -9,10 +9,11 @@ import com.poketienda.poketienda.model.Usuario;
 import com.poketienda.poketienda.repository.UsuarioRepository;
 
 
-@Service
+@Service 
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+}
 
     //Obtener todos los usuarios
     public List<Usuario> getUsuarios1() {
